@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.ufpe.cin.if710.calculadora.MainActivity">
 
+    <!--android:gravity = end para deixar o campo text_info mais parecido com uma calculadora  -->
     <TextView
         android:id="@+id/text_info"
         android:layout_width="match_parent"
@@ -18,7 +19,8 @@
         android:textSize="30sp"
         android:gravity="end"/>
 
-    <!--android:inputType="numberDecimal"-->
+    <!--android:inputType="numberDecimal" remoção deste campo, pois so estava deixando inserir numeros-->
+    <!--android:gravity = end para deixar o campo text_info mais parecido com uma calculadora  -->
     <EditText
         android:id="@+id/text_calc"
         android:layout_width="match_parent"

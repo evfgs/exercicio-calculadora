@@ -7,11 +7,20 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : Activity() {
 
+    //variavel para salvar o resultado qdo ocorre uma mudança de configuração
+    private var resultado = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //atualizando o valor de text_info com o valor que foi guardado de resultado qdo ocorre mudança de config
+        text_info.text = savedInstanceState?.getString(resultado)
 
+        //Associação geral dos botões
+        //Qdo clicka em igual calcula o valor da expressão e se lançar uma exceção dispara um Toast
+        //Qdo clicka em Clear limpa o valor de text_calc
+        //Qdo da um LongClick em Clear limpa o valor de text_calc e text_info juntos
         btn_7.setOnClickListener{text_calc.text.append("7")}
         btn_8.setOnClickListener{text_calc.text.append("8")}
         btn_9.setOnClickListener{text_calc.text.append("9")}
@@ -29,15 +38,14 @@ class MainActivity : Activity() {
 
         btn_Dot.setOnClickListener{text_calc.text.append(".")}
         btn_0.setOnClickListener{text_calc.text.append("0")}
+        btn_Add.setOnClickListener{text_calc.text.append("+")}
         btn_Equal.setOnClickListener{
             try{
                 text_info.text = eval(text_calc.text.toString()).toString()
             } catch (e:RuntimeException){
                 Toast.makeText(this,"Expressão Invalida!", Toast.LENGTH_SHORT).show()
         }
-
         }
-        btn_Add.setOnClickListener{text_calc.text.append("+")}
 
         btn_LParen.setOnClickListener{text_calc.text.append("(")}
         btn_RParen.setOnClickListener{text_calc.text.append(")")}
@@ -51,8 +59,11 @@ class MainActivity : Activity() {
             true
         }
 
-
-
+    }
+    //Salvando estado caso ocorra mudança de config
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putString(resultado,text_info.text.toString())
+        super.onSaveInstanceState(outState)
     }
 
 
